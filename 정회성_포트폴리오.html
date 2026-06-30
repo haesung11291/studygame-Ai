@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>정회성 포트폴리오 — 게임 기획자</title>
+  <style>
+    :root {
+      --bg: #0d0f1a;
+      --surface: #161929;
+      --surface2: #1e2235;
+      --accent: #7c6fff;
+      --accent2: #4fc3f7;
+      --text: #e8eaf6;
+      --muted: #8892b0;
+      --border: #2a2f4a;
+      --card-shadow: 0 4px 24px rgba(124, 111, 255, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.6rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 2rem 4rem;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(124,111,255,0.15) 0%, transparent 70%),
+        var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(124,111,255,0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; max-width: 720px; }
+
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 4px 16px;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-quote {
+      display: inline-block;
+      border-left: 3px solid var(--accent);
+      padding: 0.6rem 1.2rem;
+      color: var(--accent2);
+      font-style: italic;
+      font-size: 0.95rem;
+      background: rgba(79, 195, 247, 0.05);
+      border-radius: 0 6px 6px 0;
+      margin-top: 1rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-top: 2.2rem;
+    }
+
+    .tag {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+    }
+
+    /* ─── SECTIONS ─── */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title span { color: var(--accent); }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 2.5rem;
+    }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem 2rem;
+      box-shadow: var(--card-shadow);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+
+    @media (max-width: 640px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    /* ─── SKILLS ─── */
+    .skill-bar { margin-bottom: 1.1rem; }
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+    .skill-label span:last-child { color: var(--muted); font-size: 0.78rem; }
+    .skill-track {
+      height: 6px;
+      background: var(--surface2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      animation: fillBar 1.2s ease forwards;
+    }
+
+    @keyframes fillBar {
+      from { width: 0; }
+    }
+
+    /* ─── PROJECTS ─── */
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .project-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .team-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      color: var(--accent2);
+      background: rgba(79,195,247,0.10);
+      border: 1px solid rgba(79,195,247,0.25);
+      border-radius: 20px;
+      padding: 2px 9px;
+      text-transform: none;
+      white-space: nowrap;
+    }
+    .team-badge svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .project-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    .ptag {
+      background: rgba(124,111,255,0.12);
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* ─── PROJECTS CAROUSEL ─── */
+    .pc { position: relative; }
+
+    .pc-viewport {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+      padding: 0.25rem;
+      margin: -0.25rem;
+    }
+    .pc-viewport::-webkit-scrollbar { display: none; }
+    .pc-viewport.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+    }
+
+    .pc-track {
+      display: flex;
+      gap: 1.2rem;
+      width: max-content;
+    }
+
+    .pc-item {
+      flex: 0 0 320px;
+      max-width: 320px;
+      scroll-snap-align: start;
+    }
+    .pc-item .project-title,
+    .pc-item .project-desc,
+    .pc-item .project-tags,
+    .pc-item .ptag { user-select: none; }
+
+    @media (max-width: 720px) {
+      .pc-item { flex-basis: 84%; max-width: 84%; }
+    }
+
+    .pc-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+
+    .pc-arrow {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s, opacity 0.2s;
+    }
+    .pc-arrow:hover:not(:disabled) {
+      border-color: var(--accent);
+      background: var(--surface2);
+      transform: translateY(-1px);
+    }
+    .pc-arrow:disabled { opacity: 0.3; cursor: default; }
+
+    .pc-progress {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .pc-progress-bar {
+      display: block;
+      height: 100%;
+      width: 30%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 0.15s linear, margin-left 0.15s linear;
+    }
+
+    /* ─── TIMELINE ─── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .tl-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem; top: 6px;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+    }
+
+    .tl-date {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .tl-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 0.2rem 0;
+    }
+
+    .tl-body {
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+
+    /* ─── VALUES ─── */
+    .value-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem 1.6rem;
+      text-align: center;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .value-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .value-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(124,111,255,0.18), rgba(79,195,247,0.14));
+      border: 1px solid rgba(124,111,255,0.25);
+      color: var(--accent2);
+    }
+    .value-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: url(#valueGrad);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .value-card:hover .value-icon {
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px rgba(124,111,255,0.18);
+    }
+
+    .value-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .value-desc {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* ─── LINKS ─── */
+    .link-inline {
+      color: var(--accent2);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .link-inline:hover { border-bottom-color: var(--accent2); }
+
+    .notion-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.3rem;
+      padding: 0.45rem 0.85rem;
+      background: rgba(79,195,247,0.10);
+      border: 1px solid rgba(79,195,247,0.25);
+      border-radius: 8px;
+      color: var(--accent2);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .notion-link:hover {
+      background: rgba(79,195,247,0.18);
+      border-color: var(--accent2);
+      transform: translateY(-1px);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer strong { color: var(--accent); }
+
+    /* ─── SECTION SPACING ─── */
+    section + section { border-top: 1px solid var(--border); }
+
+    .chip {
+      display: inline-block;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--accent2);
+      border-radius: 6px;
+      padding: 3px 11px;
+      font-size: 0.78rem;
+      margin: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">정회성 · 게임 기획자</div>
+  <ul class="nav-links">
+    <li><a href="#about">소개</a></li>
+    <li><a href="#education">학력</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#skills">기술</a></li>
+    <li><a href="#values">가치관</a></li>
+    <li><a href="#goals">목표</a></li>
+  </ul>
+</nav>
+
+<div class="hero" id="top">
+  <div class="hero-content">
+    <div class="hero-badge">Game Planner Portfolio</div>
+    <h1>기획자 <span>정회성</span>의<br>포트폴리오</h1>
+    <p class="hero-sub">
+      시스템 및 콘텐츠 설계, 수치 밸런싱을 주력으로 하는 게임 기획자입니다.<br>
+      유한대학교 컴퓨터소프트웨어과 전공심화 과정 재학 중.
+    </p>
+    <div class="hero-quote">"단순한 플레이를 넘어, 기억에 남는 경험을 기획합니다."</div>
+    <div class="hero-tags">
+      <span class="tag">게임 시스템 기획</span>
+      <span class="tag">수치 밸런싱</span>
+      <span class="tag">Unity / C#</span>
+      <span class="tag">C++</span>
+      <span class="tag">Figma UI/UX</span>
+      <span class="tag">AI 프롬프트 엔지니어링</span>
+      <span class="tag">GitHub</span>
+      <span class="tag">Notion</span>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="container">
+    <div class="section-title"><span>#</span> 기본 정보</div>
+    <p class="section-desc">인적사항 및 자기소개</p>
+    <hr class="divider" />
+    <div class="grid-2">
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.8rem;">PROFILE</div>
+        <table style="width:100%;border-collapse:collapse;">
+          <tr><td style="color:var(--muted);font-size:0.85rem;padding:6px 0;width:80px;">이름</td><td style="font-weight:600;font-size:0.95rem;">정회성</td></tr>
+          <tr><td style="color:var(--muted);font-size:0.85rem;padding:6px 0;">지역</td><td style="font-size:0.9rem;">인천 부평구</td></tr>
+          <tr><td style="color:var(--muted);font-size:0.85rem;padding:6px 0;">직군</td><td style="font-size:0.9rem;">게임 기획자</td></tr>
+          <tr><td style="color:var(--muted);font-size:0.85rem;padding:6px 0;">상태</td><td style="font-size:0.9rem;">전공심화 재학 중</td></tr>
+          <tr><td style="color:var(--muted);font-size:0.85rem;padding:6px 0;">협업</td><td style="font-size:0.9rem;">GitHub / <a href="https://app.notion.com/p/a29a118633cf8283b9a701d7e156403c?source=copy_link" target="_blank" rel="noopener" class="link-inline">Notion</a> / Excel</td></tr>
+          <tr><td style="color:var(--muted);font-size:0.85rem;padding:6px 0;vertical-align:top;">포트폴리오</td><td style="font-size:0.9rem;"><a href="https://app.notion.com/p/a29a118633cf8283b9a701d7e156403c?source=copy_link" target="_blank" rel="noopener" class="notion-link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Notion 포트폴리오 바로가기</a></td></tr>
+        </table>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.8rem;">ONE LINE</div>
+          <p style="font-size:1rem;font-weight:600;line-height:1.6;margin-bottom:1.2rem;">
+            "플레이어가 게임을 종료한 후에도 마음속에 따뜻한 여운이 남는,<br>
+            오랜 시간 사랑받는 지속 가능한 콘텐츠를 만드는 기획자"
+          </p>
+        </div>
+        <div style="color:var(--muted);font-size:0.85rem;border-top:1px solid var(--border);padding-top:1rem;">
+          Unity 엔진 핸들링 + C++ 기반 시스템 이해 + AI 프롬프트 엔지니어링을 겸비한 <strong style="color:var(--text)">올라운더 기획자</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="section-title"><span>#</span> 학력 & 경력</div>
+    <p class="section-desc">교육 이력 및 직무 경험</p>
+    <hr class="divider" />
+    <div class="grid-2">
+      <div>
+        <div style="font-weight:700;margin-bottom:1.4rem;font-size:0.9rem;color:var(--accent2);">EDUCATION</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">2026.03 ~ 진행중</div>
+            <div class="tl-title">유한대학교 컴퓨터소프트웨어과</div>
+            <div class="tl-body">전공심화(학사) 과정 재학 중 · CS 기초 심화 중</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2026.02 졸업</div>
+            <div class="tl-title">유한대학교 게임콘텐츠과</div>
+            <div class="tl-body">전문학사 취득 · 게임 시스템/콘텐츠 기획 전공</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;margin-bottom:1.4rem;font-size:0.9rem;color:var(--accent2);">CAREER</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">2019.01 — 2020.11</div>
+            <div class="tl-title">코리아디지탈(주)</div>
+            <div class="tl-body">제조 수리 · 3인 팀 · 약 1년 11개월</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">커리어 전환</div>
+            <div class="tl-title">게임 기획 분야로 전환</div>
+            <div class="tl-body">진정한 열정을 따라 게임콘텐츠 전공으로 커리어 전환</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem;">
+      <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem;color:var(--accent2);">HIGHLIGHTS</div>
+      <div class="grid-3">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:800;color:var(--accent);">장학생</div>
+          <div style="color:var(--muted);font-size:0.85rem;margin-top:0.3rem;">교내 성적 장학생 선발</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:800;color:var(--accent);">3+</div>
+          <div style="color:var(--muted);font-size:0.85rem;margin-top:0.3rem;">주요 프로젝트 완성</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:800;color:var(--accent);">가챠</div>
+          <div style="color:var(--muted);font-size:0.85rem;margin-top:0.3rem;">알고리즘 비교 연구</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-title"><span>#</span> 주요 프로젝트</div>
+    <p class="section-desc">기획 및 개발 참여 프로젝트</p>
+    <hr class="divider" />
+    <div class="pc" data-pcarousel>
+      <div class="pc-viewport">
+        <div class="pc-track">
+
+          <!-- ▼ 프로젝트 카드. 더 추가하려면 아래 .pc-item 블록을 복사해서 붙여넣으세요. ▼ -->
+
+          <div class="pc-item project-card">
+            <div class="project-num">Project 01<span class="team-badge"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>4인 개발</span></div>
+            <div class="project-title">낚시 소녀</div>
+            <div class="project-desc">
+              매력적인 도트 아트 배경과 캐릭터를 담아낸 안드로이드 낚시 게임.
+              모바일 환경에서 지속 가능한 낚시 메커니즘을 직관적으로 제공.
+            </div>
+            <div style="margin-top:auto;">
+              <div style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;margin-top:0.8rem;">역할</div>
+              <p style="color:var(--text);font-size:0.85rem;">시스템 설계 · 수치 밸런싱 · 캐릭터 에셋 기획 · 4컷 웹툰 광고 기획</p>
+              <div class="project-tags" style="margin-top:1rem;">
+                <span class="ptag">Unity</span>
+                <span class="ptag">C#</span>
+                <span class="ptag">Android</span>
+                <span class="ptag">AI 에셋</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pc-item project-card">
+            <div class="project-num">Project 02<span class="team-badge"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>2인 개발</span></div>
+            <div class="project-title">메이플 월드 글로벌 콘테스트</div>
+            <div class="project-desc">
+              메이플 월드 API를 활용한 게임 제작. 글로벌 개발 콘테스트 출품 목표.
+              동료(동동환)와 협업 중인 진행형 프로젝트.
+            </div>
+            <div style="margin-top:auto;">
+              <div style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;margin-top:0.8rem;">역할</div>
+              <p style="color:var(--text);font-size:0.85rem;">메인 기획 파트 담당 · 개발 파트와 협업</p>
+              <div class="project-tags" style="margin-top:1rem;">
+                <span class="ptag">MapleWorld API</span>
+                <span class="ptag">진행중</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pc-item project-card">
+            <div class="project-num">Project 03<span class="team-badge"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1인 기획</span></div>
+            <div class="project-title">이터널리턴 스카디 캐릭터 기획</div>
+            <div class="project-desc">
+              이터널리턴 신규 실험체 '스카디' 캐릭터 컨셉 및 스킬 기획.
+              세계관에 어울리는 캐릭터 아이덴티티와 전투 메커니즘 설계.
+            </div>
+            <div style="margin-top:auto;">
+              <div style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;margin-top:0.8rem;">역할</div>
+              <p style="color:var(--text);font-size:0.85rem;">캐릭터 컨셉 · 스킬셋 기획 · 밸런스 설계</p>
+              <div class="project-tags" style="margin-top:1rem;">
+                <span class="ptag">캐릭터 기획</span>
+                <span class="ptag">스킬 설계</span>
+                <span class="ptag">이터널리턴</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pc-item project-card">
+            <div class="project-num">Project 04<span class="team-badge"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1인 기획</span></div>
+            <div class="project-title">메이플 컴패니언 앱</div>
+            <div class="project-desc">
+              메이플스토리 통합 컴패니언 앱 UI/UX 기획.
+              Figma를 활용한 인터페이스 설계 및 사용자 흐름 정의.
+            </div>
+            <div style="margin-top:auto;">
+              <div style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;margin-top:0.8rem;">역할</div>
+              <p style="color:var(--text);font-size:0.85rem;">UI/UX 기획 · Figma 인터페이스 설계</p>
+              <div class="project-tags" style="margin-top:1rem;">
+                <span class="ptag">Figma</span>
+                <span class="ptag">UI/UX</span>
+                <span class="ptag">앱 기획</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ▲ 새 프로젝트는 위 .pc-item project-card 블록을 복사해 추가하면 됩니다. ▲ -->
+
+        </div>
+      </div>
+
+      <div class="pc-controls">
+        <button class="pc-arrow" data-dir="-1" aria-label="이전 프로젝트">←</button>
+        <div class="pc-progress"><span class="pc-progress-bar"></span></div>
+        <button class="pc-arrow" data-dir="1" aria-label="다음 프로젝트">→</button>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;" class="card">
+      <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.8rem;">기타 경험</div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;">
+        <span class="chip">C++ FileHandler 최적화 (WinAPI)</span>
+        <span class="chip">가챠 알고리즘 비교 연구</span>
+        <span class="chip">용기내 지속가능 패키징 플랫폼 비즈니스 덱 기획</span>
+        <span class="chip">GCP / Firebase 활용 경험</span>
+        <span class="chip">원스토어 앱 배포 관리</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-title"><span>#</span> 기술 스팩</div>
+    <p class="section-desc">사용 가능한 기술 및 도구</p>
+    <hr class="divider" />
+    <div class="grid-2">
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:1.4rem;">개발 / 엔진</div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>C++ (WinAPI / 시스템)</span><span>기획자 수준 (70%)</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:70%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>C# (Unity)</span><span>엔진 핸들링 (65%)</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>Unity Engine</span><span>게임 기획 + 구현 (60%)</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>Git / GitHub</span><span>버전 관리 (65%)</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:1.4rem;">기획 / 협업 / AI</div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>수치 밸런싱 (Excel / 데이터시트)</span><span>주력 (85%)</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>AI 프롬프트 엔지니어링</span><span>에셋 / 문서 (80%)</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>Figma (UI/UX 기획)</span><span>앱 설계 경험 (60%)</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>Notion / 문서화</span><span>포트폴리오 정리 (75%)</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:75%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;" class="card">
+      <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:0.8rem;">클라우드 / 기타</div>
+      <div>
+        <span class="chip">Google Cloud Platform</span>
+        <span class="chip">Firebase</span>
+        <span class="chip">Flow AI</span>
+        <span class="chip">NotebookLM</span>
+        <span class="chip">ChatGPT</span>
+        <span class="chip">Claude</span>
+        <span class="chip">Android (원스토어)</span>
+        <span class="chip">Doxygen 주석</span>
+        <span class="chip">리눅스 CLI 기초</span>
+        <span class="chip">네트워크 OSI 7계층</span>
+        <span class="chip">Python 기초</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="values">
+  <div class="container">
+    <div class="section-title"><span>#</span> 강점 & 가치관</div>
+    <p class="section-desc">일하는 방식과 철학</p>
+    <hr class="divider" />
+    <svg width="0" height="0" style="position:absolute;" aria-hidden="true">
+      <defs>
+        <linearGradient id="valueGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#7c6fff"/>
+          <stop offset="100%" stop-color="#4fc3f7"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="grid-3">
+      <div class="value-card">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/></svg></div>
+        <div class="value-title">데이터 기반 기획</div>
+        <div class="value-desc">추상적 아이디어를 엑셀 데이터 시트로 정량화하여 수치 밸런싱에 반영</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+        <div class="value-title">명확한 커뮤니케이션</div>
+        <div class="value-desc">꼼꼼한 스케줄링과 타 직군과의 원활한 소통으로 프로젝트 방향성 제시</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg></div>
+        <div class="value-title">지속 가능한 콘텐츠</div>
+        <div class="value-desc">플레이어의 마음속에 오래 남는, 시간이 지나도 사랑받는 게임 설계</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="15" x2="4" y2="15"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="15" x2="22" y2="15"/></svg></div>
+        <div class="value-title">AI 활용 역량</div>
+        <div class="value-desc">Flow AI, NotebookLM, Claude 등을 기획 파이프라인에 적극 통합</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+        <div class="value-title">리더십</div>
+        <div class="value-desc">기획뿐 아니라 프로젝트 전반 스케줄링을 리드하는 올라운더 역할</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <div class="value-title">지속적 성장</div>
+        <div class="value-desc">CS 심화 학습과 게임 업데이트 분석으로 꾸준히 역량을 쌓는 중</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="goals">
+  <div class="container">
+    <div class="section-title"><span>#</span> 커리어 목표</div>
+    <p class="section-desc">지향점과 비전</p>
+    <hr class="divider" />
+    <div class="grid-2">
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:1rem;">NEAR-TERM</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.8rem;">
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent);font-weight:700;flex-shrink:0;">→</span>
+            <span style="color:var(--muted);font-size:0.88rem;">메이플 월드 글로벌 개발 콘테스트 출품</span>
+          </li>
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent);font-weight:700;flex-shrink:0;">→</span>
+            <span style="color:var(--muted);font-size:0.88rem;">컴퓨터소프트웨어과 전공심화 학업 완료</span>
+          </li>
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent);font-weight:700;flex-shrink:0;">→</span>
+            <span style="color:var(--muted);font-size:0.88rem;">C++ WinAPI 시스템 최적화 기법 심화 학습</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:1rem;">LONG-TERM</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.8rem;">
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent2);font-weight:700;flex-shrink:0;">★</span>
+            <span style="color:var(--muted);font-size:0.88rem;">글로벌 게임 프로젝트의 핵심 기획자로 자리매김 (5년 후)</span>
+          </li>
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent2);font-weight:700;flex-shrink:0;">★</span>
+            <span style="color:var(--muted);font-size:0.88rem;">플레이어의 마음에 진한 여운을 남기는 '인생 게임' 직접 설계</span>
+          </li>
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent2);font-weight:700;flex-shrink:0;">★</span>
+            <span style="color:var(--muted);font-size:0.88rem;">AI 디렉팅 기반 아트/마케팅 분야 확장 가능성 탐색</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;color:var(--text);">기획자 <strong>정회성</strong></div>
+  <div style="margin-bottom:0.4rem;">"단순한 플레이를 넘어, 기억에 남는 경험을 기획합니다."</div>
+  <div>인천 부평구 · 유한대학교 컴퓨터소프트웨어과 전공심화 재학 중</div>
+  <div style="margin-top:1.5rem;font-size:0.75rem;color:var(--border);">© 2026 정회성 포트폴리오</div>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-pcarousel]').forEach(function (pc) {
+    var vp = pc.querySelector('.pc-viewport');
+    var track = pc.querySelector('.pc-track');
+    var prev = pc.querySelector('.pc-arrow[data-dir="-1"]');
+    var next = pc.querySelector('.pc-arrow[data-dir="1"]');
+    var bar = pc.querySelector('.pc-progress-bar');
+
+    function step() {
+      var first = track.querySelector('.pc-item');
+      if (!first) return 320;
+      var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+      return first.getBoundingClientRect().width + gap;
+    }
+
+    function maxScroll() { return vp.scrollWidth - vp.clientWidth; }
+
+    function update() {
+      var max = maxScroll();
+      var ratio = max > 0 ? vp.scrollLeft / max : 0;
+      var visible = max > 0 ? vp.clientWidth / vp.scrollWidth : 1;
+      var w = Math.max(0.12, Math.min(1, visible));
+      bar.style.width = (w * 100) + '%';
+      bar.style.marginLeft = (ratio * (1 - w) * 100) + '%';
+      prev.disabled = vp.scrollLeft <= 1;
+      next.disabled = vp.scrollLeft >= max - 1;
+    }
+
+    prev.addEventListener('click', function () { vp.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { vp.scrollBy({ left: step(), behavior: 'smooth' }); });
+
+    // Drag-to-scroll (mouse). Touch uses native horizontal scroll.
+    var down = false, startX = 0, startScroll = 0, moved = false;
+    vp.addEventListener('mousedown', function (e) {
+      down = true; moved = false;
+      startX = e.pageX; startScroll = vp.scrollLeft;
+      vp.classList.add('is-dragging');
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!down) return;
+      var dx = e.pageX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      vp.scrollLeft = startScroll - dx;
+    });
+    window.addEventListener('mouseup', function () {
+      if (!down) return;
+      down = false;
+      vp.classList.remove('is-dragging');
+    });
+    // Suppress click that follows a drag
+    vp.addEventListener('click', function (e) {
+      if (moved) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+
+    vp.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+</script>
+
+</body>
+</html>

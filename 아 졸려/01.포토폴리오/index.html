@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>정회성 포트폴리오 — 게임 기획자</title>
+  <style>
+    :root {
+      --bg: #0d0f1a;
+      --surface: #161929;
+      --surface2: #1e2235;
+      --accent: #7c6fff;
+      --accent2: #fbbf24;
+      --text: #e8eaf6;
+      --muted: #8892b0;
+      --border: #2a2f4a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.6rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 2rem 4rem;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(124,111,255,0.15) 0%, transparent 70%),
+        var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(124,111,255,0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; max-width: 720px; }
+
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 4px 16px;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-quote {
+      display: inline-block;
+      border-left: 3px solid var(--accent);
+      padding: 0.6rem 1.2rem;
+      color: var(--accent2);
+      font-style: italic;
+      font-size: 0.95rem;
+      background: rgba(251, 191, 36, 0.07);
+      border-radius: 0 6px 6px 0;
+      margin-top: 1rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-top: 2.2rem;
+    }
+
+    .tag {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+    }
+
+    /* ─── SECTIONS ─── */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title span { color: var(--accent); }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 2.5rem;
+    }
+
+    .sub-label {
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent2);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+
+    @media (max-width: 768px) {
+      .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    /* ─── SKILL BARS ─── */
+    .skill-bar { margin-bottom: 1.1rem; }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-label span:last-child {
+      color: var(--accent2);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .skill-track {
+      height: 6px;
+      background: var(--surface2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      animation: fillBar 1.2s ease forwards;
+    }
+
+    @keyframes fillBar { from { width: 0; } }
+
+    /* ─── HARD/SOFT SKILL CARDS ─── */
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .skill-card-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .skill-card-list li::before {
+      content: '· ';
+      color: var(--accent);
+    }
+
+    /* ─── PROJECTS ─── */
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .project-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .project-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .project-meta {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      padding: 0.7rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-meta-item { font-size: 0.8rem; }
+    .project-meta-item .label { color: var(--muted); }
+    .project-meta-item .value { color: var(--text); font-weight: 600; }
+    .project-meta-item .value-accent { color: var(--accent); font-weight: 700; }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    .ptag {
+      background: rgba(124,111,255,0.12);
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* ─── TIMELINE ─── */
+    .timeline { position: relative; padding-left: 2rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .tl-item { position: relative; padding-bottom: 2rem; }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem; top: 6px;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+    }
+
+    .tl-date { font-size: 0.78rem; color: var(--accent); font-weight: 700; letter-spacing: 0.5px; }
+    .tl-title { font-weight: 700; font-size: 1rem; margin: 0.2rem 0; }
+    .tl-body { color: var(--muted); font-size: 0.87rem; }
+
+    /* ─── VALUE CARDS ─── */
+    .value-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.6rem;
+    }
+
+    .value-title { font-weight: 700; margin-bottom: 0.5rem; }
+
+    .value-desc { color: var(--muted); font-size: 0.85rem; }
+
+    /* ─── HOW I WORK ─── */
+    .how-item {
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .how-item:last-child { border-bottom: none; }
+
+    .how-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 0.55rem;
+      flex-shrink: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer strong { color: var(--accent); }
+
+    /* ─── ETC ─── */
+    section + section { border-top: 1px solid var(--border); }
+
+    .chip {
+      display: inline-block;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--accent2);
+      border-radius: 6px;
+      padding: 3px 11px;
+      font-size: 0.78rem;
+      margin: 2px;
+    }
+
+    .profile-photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">정회성 · 게임 기획자</div>
+  <ul class="nav-links">
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#skills">기술</a></li>
+    <li><a href="#about">소개</a></li>
+    <li><a href="#education">학력</a></li>
+    <li><a href="#values">가치관</a></li>
+    <li><a href="#goals">목표</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-content">
+    <div class="hero-badge">Game Planner Portfolio</div>
+    <h1>기획자 <span>정회성</span>의<br>포트폴리오</h1>
+    <p class="hero-sub">
+      시스템 및 콘텐츠 설계, 수치 밸런싱을 주력으로 하는 게임 기획자입니다<br>
+      유한대학교 컴퓨터소프트웨어과 전공심화 과정 재학 중
+    </p>
+    <div class="hero-quote">"No game, No Life."</div>
+    <div class="hero-tags">
+      <span class="tag">게임 시스템 기획</span>
+      <span class="tag">수치 밸런싱</span>
+      <span class="tag">Unity / C#</span>
+      <span class="tag">C++</span>
+      <span class="tag">Figma UI/UX</span>
+      <span class="tag">AI 프롬프트 엔지니어링</span>
+      <span class="tag">GitHub</span>
+      <span class="tag">Notion</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-title"><span>#</span> 주요 프로젝트</div>
+    <p class="section-desc">기획 및 개발 참여 프로젝트 · 최신순</p>
+    <hr class="divider" />
+    <div class="grid-2">
+
+      <div class="project-card">
+        <div class="project-num">Project 01</div>
+        <div class="project-title">낚시 소녀</div>
+        <div class="project-desc">
+          매력적인 도트 아트 배경과 캐릭터를 담아낸 안드로이드 낚시 게임.
+          모바일 환경에서 지속 가능한 낚시 메커니즘을 직관적으로 제공.
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-item"><span class="label">인원 </span><span class="value">4인 팀 (조장)</span></div>
+          <div class="project-meta-item"><span class="label">기여도 </span><span class="value-accent">기획 파트 리드</span></div>
+          <div class="project-meta-item"><span class="label">포지션 </span><span class="value">게임 기획</span></div>
+        </div>
+        <div style="margin-top:auto;">
+          <div style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;margin-top:0.8rem;">역할</div>
+          <p style="color:var(--text);font-size:0.85rem;">조장 · 시스템 설계 · 수치 밸런싱 · 캐릭터 에셋 기획 · 4컷 웹툰 광고 기획</p>
+          <div class="project-tags" style="margin-top:1rem;">
+            <span class="ptag">Unity</span>
+            <span class="ptag">C#</span>
+            <span class="ptag">Android</span>
+            <span class="ptag">AI 에셋</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 02</div>
+        <div class="project-title">메이플 월드 글로벌 콘테스트</div>
+        <div class="project-desc">
+          메이플 월드 API를 활용한 게임 제작. 글로벌 개발 콘테스트 출품 목표.
+          동료(종환)와 협업 중인 진행형 프로젝트.
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-item"><span class="label">인원 </span><span class="value">2인 팀</span></div>
+          <div class="project-meta-item"><span class="label">기여도 </span><span class="value-accent">기획 파트 100%</span></div>
+          <div class="project-meta-item"><span class="label">포지션 </span><span class="value">게임 기획 (리드)</span></div>
+        </div>
+        <div style="margin-top:auto;">
+          <div style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;margin-top:0.8rem;">역할</div>
+          <p style="color:var(--text);font-size:0.85rem;">메인 기획 파트 담당 · 개발 파트(종환)와 협업</p>
+          <div class="project-tags" style="margin-top:1rem;">
+            <span class="ptag">MapleWorld API</span>
+            <span class="ptag">진행중</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 03</div>
+        <div class="project-title">메이플스토리 통합 컴패니언 앱</div>
+        <div class="project-desc">
+          메이플스토리 유저를 위한 통합 컴패니언 앱 UI/UX 기획.
+          Figma를 활용해 인터페이스 전체를 직접 설계.
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-item"><span class="label">인원 </span><span class="value">1인 (개인 프로젝트)</span></div>
+          <div class="project-meta-item"><span class="label">기여도 </span><span class="value-accent">100%</span></div>
+          <div class="project-meta-item"><span class="label">포지션 </span><span class="value">UI/UX 기획</span></div>
+        </div>
+        <div style="margin-top:auto;">
+          <div style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;margin-top:0.8rem;">역할</div>
+          <p style="color:var(--text);font-size:0.85rem;">Figma UI/UX 설계 · 화면 흐름 및 인터페이스 전체 기획</p>
+          <div class="project-tags" style="margin-top:1rem;">
+            <span class="ptag">Figma</span>
+            <span class="ptag">UI/UX</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 04</div>
+        <div class="project-title">이터널리턴 스카디 캐릭터 기획</div>
+        <div class="project-desc">
+          게임 이터널리턴의 신규 캐릭터 '스카디'의 콘셉트 및 스킬 세트 기획.
+          캐릭터의 정체성과 플레이 패턴을 처음부터 직접 설계.
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-item"><span class="label">인원 </span><span class="value">1인 (개인 프로젝트)</span></div>
+          <div class="project-meta-item"><span class="label">기여도 </span><span class="value-accent">100%</span></div>
+          <div class="project-meta-item"><span class="label">포지션 </span><span class="value">캐릭터 기획</span></div>
+        </div>
+        <div style="margin-top:auto;">
+          <div style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;margin-top:0.8rem;">역할</div>
+          <p style="color:var(--text);font-size:0.85rem;">캐릭터 콘셉트 기획 · 스킬 세트 설계 · 밸런스 수치 설정</p>
+          <div class="project-tags" style="margin-top:1rem;">
+            <span class="ptag">캐릭터 기획</span>
+            <span class="ptag">스킬 설계</span>
+            <span class="ptag">수치 밸런싱</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:2rem;" class="card">
+      <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.8rem;">기타 경험</div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;">
+        <span class="chip">C++ FileHandler 최적화 (WinAPI)</span>
+        <span class="chip">가챠 알고리즘 비교 연구</span>
+        <span class="chip">용기내 지속가능 패키징 플랫폼 비즈니스 덱 기획</span>
+        <span class="chip">GCP / Firebase 활용 경험</span>
+        <span class="chip">플레이스토어 앱 배포 관리</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-title"><span>#</span> 기술 스펙</div>
+    <p class="section-desc">역량의 전문성에 따라 상 · 중 · 하 수준으로 분류하였습니다</p>
+    <hr class="divider" />
+
+    <!-- Hard Skills -->
+    <div class="sub-label">Hard Skills</div>
+    <div class="grid-2" style="margin-bottom:2rem;">
+      <div class="skill-card">
+        <div class="skill-card-title">시스템 및 콘텐츠 설계</div>
+        <ul class="skill-card-list">
+          <li>핵심 플레이 및 인게임 경제 시스템의 순환 루프 구축</li>
+          <li>유저 몰입을 이끌어내는 캐릭터 상세 콘셉트 및 콘텐츠 기획</li>
+          <li>장기 서비스를 고려한 방치형/성장형 게임의 코어 구조 설계</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">수치 밸런싱 및 데이터 시트</div>
+        <ul class="skill-card-list">
+          <li>성장 체감을 조율하는 레벨별 필요 경험치 테이블 정밀 설계</li>
+          <li>확률 기반 콘텐츠의 구간별 보상 및 획득 확률 곡선 밸런싱</li>
+          <li>시뮬레이션을 통한 인게임 재화 인플레이션 방지 및 수치 제어</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">게임 엔진 핸들링</div>
+        <ul class="skill-card-list">
+          <li>Unity 환경 내 UI 배치 및 기획 데이터 연동 테스트</li>
+          <li>프로토타이핑을 통한 기획 의도 및 핵심 메커니즘의 실시간 검증</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">레벨 디자인 및 확장성 기획</div>
+        <ul class="skill-card-list">
+          <li>유저 리텐션을 확보하는 단계별 환경 및 난이도 디자인</li>
+          <li>콘텐츠 소모 속도를 고려한 장기 업데이트 로드맵 구상</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Soft Skills -->
+    <div class="sub-label">Soft Skills</div>
+    <div class="grid-4" style="margin-bottom:2rem;">
+      <div class="skill-card">
+        <div class="skill-card-title">커뮤니케이션</div>
+        <ul class="skill-card-list">
+          <li>다직군(개발, 그래픽, QA) 협업의 유기적인 의견 조율</li>
+          <li>프로그래머/아티스트가 즉각 이해하는 직관적인 기획서 작성</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">꼼꼼함</div>
+        <ul class="skill-card-list">
+          <li>소수점 단위까지 세밀하게 제어하는 데이터 테이블 관리</li>
+          <li>예외 사항과 논리적 오류를 최소화하는 기능 규칙 수립</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">리더십</div>
+        <ul class="skill-card-list">
+          <li>팀 프로젝트의 마일스톤 관리 및 공통 개발 인프라 구축 주도</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">스케줄링</div>
+        <ul class="skill-card-list">
+          <li>한정된 기한 내 빌드 안정화를 위한 일정 수립 및 리스크 관리</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Tool Proficiency -->
+    <div class="sub-label">Tool Proficiency</div>
+    <div class="grid-2" style="margin-bottom:1.5rem;">
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:1.4rem;">기획 / 데이터</div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>수치 밸런싱 (Excel / 데이터시트)</span><span>85%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>AI 프롬프트 엔지니어링</span><span>80%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>Notion / 문서화</span><span>75%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>Figma (UI/UX 기획)</span><span>60%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:1.4rem;">개발 / 엔진</div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>C++ (WinAPI / 시스템)</span><span>70%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:70%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>Git / GitHub</span><span>65%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>C# (Unity)</span><span>65%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-label"><span>Unity Engine</span><span>60%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other Tools -->
+    <div class="card">
+      <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:0.8rem;">기타 도구 / 환경</div>
+      <div>
+        <span class="chip">Google Cloud Platform</span>
+        <span class="chip">Firebase</span>
+        <span class="chip">Flow AI</span>
+        <span class="chip">NotebookLM</span>
+        <span class="chip">ChatGPT</span>
+        <span class="chip">Claude</span>
+        <span class="chip">Android (원스토어)</span>
+        <span class="chip">Doxygen 주석</span>
+        <span class="chip">리눅스 CLI 기초</span>
+        <span class="chip">네트워크 OSI 7계층</span>
+        <span class="chip">Python 기초</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-title"><span>#</span> 기본 정보</div>
+    <p class="section-desc">인적사항 및 자기소개</p>
+    <hr class="divider" />
+    <div class="grid-2">
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem;">PROFILE</div>
+        <div style="display:flex;gap:1.4rem;align-items:flex-start;">
+          <img src="노션 포플/my-notion-face-transparent.png" alt="정회성" class="profile-photo" />
+          <table style="width:100%;border-collapse:collapse;">
+            <tr><td style="color:var(--muted);font-size:0.85rem;padding:5px 0;width:72px;">이름</td><td style="font-weight:600;font-size:0.95rem;">정회성</td></tr>
+            <tr><td style="color:var(--muted);font-size:0.85rem;padding:5px 0;">지역</td><td style="font-size:0.9rem;">인천 부평구</td></tr>
+            <tr><td style="color:var(--muted);font-size:0.85rem;padding:5px 0;">지원 직군</td><td style="font-size:0.9rem;font-weight:600;color:var(--accent);">게임 기획자</td></tr>
+            <tr><td style="color:var(--muted);font-size:0.85rem;padding:5px 0;">상태</td><td style="font-size:0.9rem;">전공심화 재학 중</td></tr>
+            <tr><td style="color:var(--muted);font-size:0.85rem;padding:5px 0;">이메일</td><td style="font-size:0.88rem;"><a href="mailto:sakakinji@naver.com" style="color:var(--text);text-decoration:none;">sakakinji@naver.com</a></td></tr>
+            <tr><td style="color:var(--muted);font-size:0.85rem;padding:5px 0;">전화</td><td style="font-size:0.88rem;">010-8701-8670</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.8rem;">ONE LINE</div>
+          <p style="font-size:0.97rem;font-weight:600;line-height:1.5;margin-bottom:1.2rem;">"플레이어가 게임을 종료한 후에도 마음속에 따뜻한 여운이 남는, 오랜 시간 사랑받는 지속 가능한 콘텐츠를 만드는 기획자"</p>
+        </div>
+        <div style="color:var(--muted);font-size:0.85rem;border-top:1px solid var(--border);padding-top:1rem;">
+          Unity 엔진 핸들링 + C++ 기반 시스템 이해 + AI 프롬프트 엔지니어링을 겸비한 <strong style="color:var(--text)">올라운더 기획자</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & CAREER -->
+<section id="education">
+  <div class="container">
+    <div class="section-title"><span>#</span> 학력 & 경력</div>
+    <p class="section-desc">교육 이력 및 직무 경험</p>
+    <hr class="divider" />
+    <div class="grid-2">
+      <div>
+        <div style="font-weight:700;margin-bottom:1.4rem;font-size:0.9rem;color:var(--accent2);">EDUCATION</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">2026.03 ~ 진행중</div>
+            <div class="tl-title">유한대학교 컴퓨터소프트웨어과</div>
+            <div class="tl-body">전공심화(학사) 과정 재학 중 · CS 기초 심화 중</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2023.03 ~ 2026.02</div>
+            <div class="tl-title">유한대학교 게임콘텐츠과</div>
+            <div class="tl-body">전문학사 취득 · 게임 시스템/콘텐츠 기획 전공 · 성적 장학생 선발</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;margin-bottom:1.4rem;font-size:0.9rem;color:var(--accent2);">CAREER</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">2019.01 — 2020.11</div>
+            <div class="tl-title">코리아디지탈(주)</div>
+            <div class="tl-body">제조 수리 · 3인 팀 · 총 1년 11개월</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">커리어 전환</div>
+            <div class="tl-title">게임 기획 분야로 전환</div>
+            <div class="tl-body">"No game, No Life" — 진정한 열정을 따라 게임콘텐츠 전공으로 전환</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem;">
+      <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem;color:var(--accent2);">HIGHLIGHTS</div>
+      <div class="grid-3">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:800;color:var(--accent);">장학생</div>
+          <div style="color:var(--muted);font-size:0.85rem;margin-top:0.3rem;">교내 성적 장학생 선발</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:800;color:var(--accent);">3+</div>
+          <div style="color:var(--muted);font-size:0.85rem;margin-top:0.3rem;">주요 프로젝트 완성</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:1.8rem;font-weight:800;color:var(--accent);">가챠</div>
+          <div style="color:var(--muted);font-size:0.85rem;margin-top:0.3rem;">알고리즘 비교 연구</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <div class="container">
+    <div class="section-title"><span>#</span> 강점 & 가치관</div>
+    <p class="section-desc">일하는 방식과 철학</p>
+    <hr class="divider" />
+
+    <div class="grid-3" style="margin-bottom:2rem;">
+      <div class="value-card">
+        <div class="value-title">데이터 기반 기획</div>
+        <div class="value-desc">추상적 아이디어를 엑셀 데이터 시트로 정량화하여 수치 밸런싱에 반영</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">명확한 커뮤니케이션</div>
+        <div class="value-desc">꼼꼼한 스케줄링과 타 직군과의 원활한 소통으로 프로젝트 방향성 제시</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">지속 가능한 콘텐츠</div>
+        <div class="value-desc">플레이어의 마음속에 오래 남는, 시간이 지나도 사랑받는 게임 설계</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">AI 활용 역량</div>
+        <div class="value-desc">Flow AI, NotebookLM, Claude 등을 기획 파이프라인에 적극 통합</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">리더십</div>
+        <div class="value-desc">기획뿐 아니라 프로젝트 전반 스케줄링을 리드하는 올라운더 역할</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">지속적 성장</div>
+        <div class="value-desc">CS 심화 학습과 게임 업데이트 분석으로 꾸준히 역량을 쌓는 중</div>
+      </div>
+    </div>
+
+    <!-- How I Work -->
+    <div class="sub-label" style="margin-top:2rem;">일하는 방식</div>
+    <div class="card">
+      <div class="how-item">
+        <div class="how-dot"></div>
+        <span style="font-size:0.9rem;">목표 달성도 중요하지만 일의 과정에서 재미를 찾는 편이에요.</span>
+      </div>
+      <div class="how-item">
+        <div class="how-dot"></div>
+        <span style="font-size:0.9rem;">회사와 세상에 긍정적 영향을 주는 일은 그 자체로 동기부여가 됩니다.</span>
+      </div>
+      <div class="how-item">
+        <div class="how-dot"></div>
+        <span style="font-size:0.9rem;">문제가 생겨도 그 상황 안에서 일을 진행할 수 있는 방향을 찾습니다.</span>
+      </div>
+      <div class="how-item">
+        <div class="how-dot"></div>
+        <span style="font-size:0.9rem;">함께 정한 기한은 반드시 지키려고 노력해요.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS -->
+<section id="goals">
+  <div class="container">
+    <div class="section-title"><span>#</span> 커리어 목표</div>
+    <p class="section-desc">지향점과 비전</p>
+    <hr class="divider" />
+    <div class="grid-2">
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:1rem;">NEAR-TERM</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.8rem;">
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent);font-weight:700;flex-shrink:0;">→</span>
+            <span style="color:var(--muted);font-size:0.88rem;">메이플 월드 글로벌 개발 콘테스트 출품</span>
+          </li>
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent);font-weight:700;flex-shrink:0;">→</span>
+            <span style="color:var(--muted);font-size:0.88rem;">컴퓨터소프트웨어과 전공심화 학업 완료</span>
+          </li>
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent);font-weight:700;flex-shrink:0;">→</span>
+            <span style="color:var(--muted);font-size:0.88rem;">C++ WinAPI 시스템 최적화 기법 심화 학습</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <div style="color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:1px;margin-bottom:1rem;">LONG-TERM</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.8rem;">
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent2);font-weight:700;flex-shrink:0;">★</span>
+            <span style="color:var(--muted);font-size:0.88rem;">글로벌 게임 프로젝트의 핵심 기획자로 자리매김 (5년 후)</span>
+          </li>
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent2);font-weight:700;flex-shrink:0;">★</span>
+            <span style="color:var(--muted);font-size:0.88rem;">플레이어의 마음에 진한 여운을 남기는 '인생 게임' 직접 설계</span>
+          </li>
+          <li style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <span style="color:var(--accent2);font-weight:700;flex-shrink:0;">★</span>
+            <span style="color:var(--muted);font-size:0.88rem;">AI 디렉팅 기반 아트/마케팅 분야 확장 가능성 탐색</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;color:var(--text);">기획자 <strong>정회성</strong></div>
+  <div style="margin-bottom:0.8rem;">"No game, No Life."</div>
+  <div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:0.5rem;">
+    <a href="mailto:sakakinji@naver.com" style="color:var(--muted);text-decoration:none;font-size:0.88rem;">sakakinji@naver.com</a>
+    <span style="color:var(--muted);font-size:0.88rem;">010-8701-8670</span>
+    <span style="color:var(--muted);font-size:0.88rem;">인천 부평구</span>
+  </div>
+  <div style="margin-top:1.5rem;font-size:0.75rem;color:var(--border);">© 2026 정회성 포트폴리오</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>정회성 — 자기소개서</title>
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       Apple — Photography-first / Museum Gallery 디자인 토큰
+       ═══════════════════════════════════════════════════════════ */
+    :root {
+      /* Accent — single Action Blue */
+      --primary: #0066cc;
+      --primary-focus: #0071e3;
+      --primary-on-dark: #2997ff;
+      /* Ink & body */
+      --ink: #1d1d1f;
+      --body-on-dark: #ffffff;
+      --body-muted: #cccccc;
+      --ink-muted-80: #333333;
+      --ink-muted-48: #7a7a7a;
+      /* Hairlines */
+      --divider-soft: #f0f0f0;
+      --hairline: #e0e0e0;
+      /* Surfaces */
+      --canvas: #ffffff;
+      --canvas-parchment: #f5f5f7;
+      --surface-pearl: #fafafc;
+      --surface-tile-1: #272729;
+      --surface-tile-2: #2a2a2c;
+      --surface-tile-3: #252527;
+      --surface-black: #000000;
+      --chip-translucent: rgba(210,210,215,0.64);
+      /* System product shadow (the only shadow) */
+      --product-shadow: rgba(0,0,0,0.22) 3px 5px 30px 0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background: var(--canvas);
+      font-size: 17px;
+      line-height: 1.47;
+      letter-spacing: -0.374px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── GLOBAL NAV (true black, 44px) ─── */
+    .global-nav {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--surface-black);
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 24px;
+    }
+    .global-nav .gn-logo {
+      color: var(--body-on-dark);
+      font-size: 18px;
+    }
+    .global-nav a {
+      color: var(--body-on-dark);
+      font-size: 12px;
+      letter-spacing: -0.12px;
+      text-decoration: none;
+      opacity: 0.85;
+    }
+    .global-nav a:hover { opacity: 1; }
+    .global-nav .spacer { margin-left: auto; }
+
+    /* ─── SUB NAV (frosted parchment, sticky) ─── */
+    .sub-nav {
+      position: sticky; top: 44px; z-index: 49;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 24px;
+      background: rgba(245,245,247,0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .sub-nav .sn-title {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: 0.231px;
+      color: var(--ink);
+    }
+    .sub-nav .sn-links {
+      display: flex;
+      gap: 20px;
+      margin-left: auto;
+    }
+    .sub-nav .sn-links a {
+      font-size: 14px;
+      letter-spacing: -0.224px;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+    .sub-nav .sn-links a:hover { opacity: 1; }
+    .sub-nav .buy {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 9999px;
+      padding: 6px 16px;
+      font-size: 14px;
+      letter-spacing: -0.224px;
+      text-decoration: none;
+    }
+    @media (max-width: 734px) {
+      .sub-nav .sn-links a:not(.buy) { display: none; }
+    }
+
+    /* ─── TILE (full-bleed, edge-to-edge) ─── */
+    .tile {
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .tile-inner { max-width: 700px; margin: 0 auto; }
+    .tile-wide { max-width: 980px; margin: 0 auto; }
+
+    .light { background: var(--canvas); color: var(--ink); }
+    .parchment { background: var(--canvas-parchment); color: var(--ink); }
+    .dark  { background: var(--surface-tile-1); color: var(--body-on-dark); }
+    .dark2 { background: var(--surface-tile-2); color: var(--body-on-dark); }
+    .dark3 { background: var(--surface-tile-3); color: var(--body-on-dark); }
+
+    /* ─── TYPOGRAPHY ─── */
+    .eyebrow {
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: 0.231px;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .dark .eyebrow, .dark2 .eyebrow, .dark3 .eyebrow { color: var(--primary-on-dark); }
+
+    h1.hero {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: 56px;
+      font-weight: 600;
+      line-height: 1.07;
+      letter-spacing: -0.28px;
+    }
+    h2.display {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    .lead {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.14;
+      letter-spacing: 0.196px;
+      margin-top: 17px;
+    }
+    .lead-airy {
+      font-family: "SF Pro Text", system-ui, sans-serif;
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.5;
+      margin-top: 24px;
+    }
+    .tagline {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: 0.231px;
+    }
+    p.body { font-size: 17px; line-height: 1.47; }
+    .muted { color: var(--ink-muted-80); }
+    .dark .muted, .dark2 .muted, .dark3 .muted { color: var(--body-muted); }
+
+    /* ─── CTA PILLS ─── */
+    .ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 9999px;
+      padding: 11px 22px;
+      font-size: 17px;
+      letter-spacing: -0.374px;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+    .pill:active { transform: scale(0.95); }
+    .pill.ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .dark .pill.ghost, .dark2 .pill.ghost, .dark3 .pill.ghost {
+      color: var(--primary-on-dark);
+      border-color: var(--primary-on-dark);
+    }
+
+    a.link {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .dark a.link, .dark2 a.link, .dark3 a.link { color: var(--primary-on-dark); }
+    a.link:hover { text-decoration: underline; }
+
+    /* ─── "PRODUCT" GLYPH resting on surface (uses the one shadow) ─── */
+    .product {
+      width: 132px; height: 132px;
+      margin: 48px auto 0;
+      border-radius: 28px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: 64px;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(160deg, #3a3a3c, #1d1d1f);
+      box-shadow: var(--product-shadow);
+      letter-spacing: -1px;
+    }
+    .light .product, .parchment .product {
+      background: linear-gradient(160deg, #f0f0f2, #d9d9de);
+      color: var(--ink);
+    }
+
+    /* ─── STAT ROW ─── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+      max-width: 720px;
+      margin-left: auto; margin-right: auto;
+    }
+    .stat .n {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: 40px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .dark .stat .n, .dark2 .stat .n, .dark3 .stat .n { color: var(--primary-on-dark); }
+    .stat .l { font-size: 14px; letter-spacing: -0.224px; margin-top: 8px; }
+    @media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
+
+    /* ─── UTILITY CARD GRID (store-style) ─── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+      text-align: left;
+    }
+    @media (max-width: 734px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: 18px;
+      padding: 24px;
+    }
+    .dark .card, .dark2 .card, .dark3 .card {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .card .k {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.224px;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .dark .card .k, .dark2 .card .k, .dark3 .card .k { color: var(--primary-on-dark); }
+    .card .h {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.374px;
+      margin-bottom: 6px;
+    }
+    .card p { font-size: 14px; line-height: 1.43; letter-spacing: -0.224px; }
+    .card .muted { color: var(--ink-muted-48); }
+    .dark .card .muted, .dark2 .card .muted, .dark3 .card .muted { color: var(--body-muted); }
+    .ptags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .ptag {
+      font-size: 12px;
+      letter-spacing: -0.12px;
+      color: var(--primary);
+      border: 1px solid var(--hairline);
+      border-radius: 9999px;
+      padding: 3px 10px;
+    }
+    .dark .ptag, .dark2 .ptag, .dark3 .ptag {
+      color: var(--primary-on-dark);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    /* project number list — configurator-chip feel */
+    .chips {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      justify-content: center; margin-top: 32px;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--canvas);
+      color: var(--ink);
+      border: 1px solid var(--hairline);
+      border-radius: 9999px;
+      padding: 12px 18px;
+      font-size: 14px;
+      letter-spacing: -0.224px;
+    }
+    .dark .chip, .dark2 .chip, .dark3 .chip {
+      background: rgba(255,255,255,0.06);
+      color: var(--body-on-dark);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .chip .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--primary);
+    }
+
+    /* editorial text block (environment-page feel) */
+    .prose { max-width: 700px; margin: 24px auto 0; text-align: left; }
+    .prose p { font-size: 21px; line-height: 1.5; font-weight: 400; margin-bottom: 20px; letter-spacing: 0; }
+    .prose p:last-child { margin-bottom: 0; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--canvas-parchment);
+      color: var(--ink-muted-80);
+      padding: 64px 24px;
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: -0.12px;
+    }
+    footer .fin { max-width: 980px; margin: 0 auto; }
+    footer .frow {
+      display: flex; flex-wrap: wrap; gap: 24px;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: 24px; margin-bottom: 24px;
+    }
+    footer h4 { font-size: 12px; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+    footer a { color: var(--ink-muted-80); text-decoration: none; display: block; }
+    footer a:hover { text-decoration: underline; }
+    footer .legal { color: var(--ink-muted-48); font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ GLOBAL NAV ═══ -->
+  <nav class="global-nav">
+    <span class="gn-logo">◆</span>
+    <a href="#growth">성장과정</a>
+    <a href="#strength">강점</a>
+    <a href="#work">경험</a>
+    <a href="#future">포부</a>
+    <span class="spacer"></span>
+    <a href="https://www.notion.so/a29a118633cf8283b9a701d7e156403c?source=copy_link" target="_blank" rel="noopener">Notion</a>
+    <a href="https://github.com/haesung11291/studygame-Ai" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+
+  <!-- ═══ SUB NAV (frosted) ═══ -->
+  <div class="sub-nav">
+    <span class="sn-title">정회성 — 게임 기획자</span>
+    <div class="sn-links">
+      <a href="#growth">소개</a>
+      <a href="#strength">강점</a>
+      <a href="#work">프로젝트</a>
+      <a href="#future" class="buy">함께하기</a>
+    </div>
+  </div>
+
+  <!-- ═══ HERO (light) ═══ -->
+  <section class="tile light" id="top">
+    <div class="tile-inner">
+      <div class="eyebrow">Self-Introduction</div>
+      <h1 class="hero">기억에 남는 경험을<br>기획합니다.</h1>
+      <p class="lead">게임 시스템·콘텐츠 기획과 수치 밸런싱을 주력으로 하는 기획자, 정회성입니다.</p>
+      <div class="ctas">
+        <a href="#growth" class="pill">더 알아보기</a>
+        <a href="#future" class="pill ghost">함께하기 ›</a>
+      </div>
+      <div class="product">鄭</div>
+    </div>
+  </section>
+
+  <!-- ═══ 성장과정 (dark) ═══ -->
+  <section class="tile dark" id="growth">
+    <div class="tile-inner">
+      <div class="eyebrow">Chapter 01 — 열정을 따라온 커리어</div>
+      <h2 class="display">한 번의 방향 전환이,<br>진짜 하고 싶은 일 앞에.</h2>
+      <div class="prose">
+        <p>
+          2019년부터 약 1년 11개월간 <a href="#" class="link">코리아디지탈(주)</a>에서 3인 팀의
+          제조·수리 업무를 담당했습니다. 성실히 임했지만, 마음 한켠에는 언제나 "사람의 마음을
+          움직이는 경험을 직접 만들고 싶다"는 확신이 자라고 있었습니다.
+        </p>
+        <p>
+          저는 그 열정을 외면하지 않고 안정된 자리를 떠나 <strong>게임 기획</strong>이라는 새로운
+          길로 커리어를 전환했습니다. 유한대학교 게임콘텐츠과에서 시스템·콘텐츠 기획을 전공해
+          전문학사를 취득했고, 지금은 같은 대학 <strong>컴퓨터소프트웨어과 전공심화 과정</strong>에서
+          CS 기초를 더 깊이 다지고 있습니다.
+        </p>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">장학생</div><div class="l muted">교내 성적 장학생 선발</div></div>
+        <div class="stat"><div class="n">3+</div><div class="l muted">주요 프로젝트 완성</div></div>
+        <div class="stat"><div class="n">CS</div><div class="l muted">전공심화 재학 중</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 강점 (parchment) ═══ -->
+  <section class="tile parchment" id="strength">
+    <div class="tile-wide">
+      <div class="eyebrow">Chapter 02 — 강점 & 일하는 방식</div>
+      <h2 class="display">추상적인 재미를<br>측정 가능한 데이터로.</h2>
+      <p class="lead">그리고 그것을 다시 사람이 공감하는 경험으로 되돌려 놓습니다.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="k">데이터 기반 기획</div>
+          <div class="h">감이 아닌 근거로 설득합니다</div>
+          <p class="muted">추상적 아이디어를 Excel 데이터 시트로 정량화하여 수치 밸런싱에 반영합니다.</p>
+        </div>
+        <div class="card">
+          <div class="k">명확한 커뮤니케이션</div>
+          <div class="h">방향성을 제시합니다</div>
+          <p class="muted">꼼꼼한 스케줄링과 타 직군과의 원활한 소통으로 프로젝트를 이끕니다.</p>
+        </div>
+        <div class="card">
+          <div class="k">올라운더 리더십</div>
+          <div class="h">기획과 구현 사이를 잇습니다</div>
+          <p class="muted">Unity 엔진 핸들링과 C++ 시스템 이해를 겸비해 프로젝트 전반을 리드합니다.</p>
+        </div>
+        <div class="card">
+          <div class="k">AI 활용 역량</div>
+          <div class="h">파이프라인에 통합합니다</div>
+          <p class="muted">Flow AI, NotebookLM, Claude 등을 기획·에셋·문서 작업에 적극 활용합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 경험 (dark2) ═══ -->
+  <section class="tile dark2" id="work">
+    <div class="tile-inner">
+      <div class="eyebrow">Chapter 03 — 직접 만들며 배운 것</div>
+      <h2 class="display">기획과 개발의 경계를<br>넘나들었습니다.</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="k">Project 01 · 4인 개발</div>
+          <div class="h">낚시 소녀</div>
+          <p class="muted">
+            매력적인 도트 아트 배경과 캐릭터를 담은 안드로이드 낚시 게임. 시스템 설계·수치
+            밸런싱·캐릭터 에셋 기획을 맡아 모바일 환경의 지속 가능한 낚시 메커니즘을 직관적으로
+            설계하고, 4컷 웹툰 광고까지 기획했습니다.
+          </p>
+          <div class="ptags">
+            <span class="ptag">Unity</span><span class="ptag">C#</span><span class="ptag">Android</span><span class="ptag">AI 에셋</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="k">Project 02 · 2인 개발 · 진행 중</div>
+          <div class="h">메이플 월드 글로벌 콘테스트</div>
+          <p class="muted">
+            MapleWorld API를 활용한 게임을 동료와 협업해 글로벌 개발 콘테스트 출품을 목표로 진행
+            중입니다. 메인 기획 파트를 담당하며 개발 파트와 긴밀히 협업하고 있습니다.
+          </p>
+          <div class="ptags">
+            <span class="ptag">MapleWorld API</span><span class="ptag">진행중</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="k">Project 03 · 1인 기획</div>
+          <div class="h">이터널리턴 — 스카디 캐릭터 기획</div>
+          <p class="muted">
+            신규 실험체 '스카디'의 컨셉과 스킬셋을 기획했습니다. 세계관에 어울리는 캐릭터
+            아이덴티티를 잡고, 전투 메커니즘과 밸런스를 함께 설계했습니다.
+          </p>
+          <div class="ptags">
+            <span class="ptag">캐릭터 기획</span><span class="ptag">스킬 설계</span><span class="ptag">밸런싱</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="k">Project 04 · 1인 기획</div>
+          <div class="h">메이플 컴패니언 앱</div>
+          <p class="muted">
+            메이플스토리 통합 컴패니언 앱의 UI/UX를 기획했습니다. Figma로 인터페이스를 설계하고
+            사용자 흐름을 정의하며, 게임 밖에서도 플레이어의 경험을 잇는 서비스 기획을 경험했습니다.
+          </p>
+          <div class="ptags">
+            <span class="ptag">Figma</span><span class="ptag">UI/UX</span><span class="ptag">앱 기획</span>
+          </div>
+        </div>
+      </div>
+      <div class="chips">
+        <span class="chip"><span class="dot"></span>가챠 알고리즘 비교 연구</span>
+        <span class="chip"><span class="dot"></span>C++ FileHandler 최적화 (WinAPI)</span>
+        <span class="chip"><span class="dot"></span>GCP / Firebase 활용</span>
+        <span class="chip"><span class="dot"></span>원스토어 앱 배포 관리</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 입사 후 포부 (light) ═══ -->
+  <section class="tile light" id="future">
+    <div class="tile-inner">
+      <div class="eyebrow">Chapter 04 — 입사 후 포부</div>
+      <h2 class="display">단순한 플레이를 넘어,<br>여운을 남기겠습니다.</h2>
+      <div class="prose">
+        <p>
+          입사 후에는 팀의 데이터와 시스템을 빠르게 이해하여, 제 <strong>수치 밸런싱 역량</strong>으로
+          콘텐츠 완성도에 즉시 기여하겠습니다. 나아가 Unity 구현 이해와 AI 디렉팅 역량을 결합해
+          기획-개발-아트의 간극을 줄이는 <strong>연결형 기획자</strong>로 성장하겠습니다.
+        </p>
+        <p>
+          5년 뒤에는 글로벌 게임 프로젝트의 핵심 기획자로 자리매김하고, 언젠가 플레이어의 마음에
+          진한 여운을 남기는 <strong>'인생 게임'</strong>을 직접 설계하는 것 — 그것이 제가 이 길을
+          걷는 이유입니다.
+        </p>
+      </div>
+      <div class="ctas">
+        <a href="https://www.notion.so/a29a118633cf8283b9a701d7e156403c?source=copy_link" target="_blank" rel="noopener" class="pill">Notion 포트폴리오</a>
+        <a href="https://github.com/haesung11291/studygame-Ai" target="_blank" rel="noopener" class="pill ghost">GitHub ›</a>
+      </div>
+      <div class="product">◆</div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="fin">
+      <div class="frow">
+        <div>
+          <h4>Profile</h4>
+          <a>정회성 · 게임 기획자</a>
+          <a>인천 부평구</a>
+          <a>유한대 컴퓨터소프트웨어과 전공심화</a>
+        </div>
+        <div>
+          <h4>Skills</h4>
+          <a>수치 밸런싱 · 콘텐츠 설계</a>
+          <a>Unity / C# · C++ (WinAPI)</a>
+          <a>Figma UI/UX · AI 디렉팅</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="https://www.notion.so/a29a118633cf8283b9a701d7e156403c?source=copy_link" target="_blank" rel="noopener">Notion 포트폴리오</a>
+          <a href="https://github.com/haesung11291/studygame-Ai" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:sakakirito6339@gmail.com">E-mail</a>
+        </div>
+      </div>
+      <div class="legal">
+        Copyright © 2026 정회성. 게임 기획자 자기소개서. 모든 프로젝트 및 역할 기재 사항은 실제
+        참여 내역을 바탕으로 작성되었습니다.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

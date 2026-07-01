@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>정회성 — 자기소개서 (프레젠테이션)</title>
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       Apple — Slide Deck (photography-first / museum gallery)
+       ═══════════════════════════════════════════════════════════ */
+    :root {
+      --primary: #0066cc;
+      --primary-focus: #0071e3;
+      --primary-on-dark: #2997ff;
+      --ink: #1d1d1f;
+      --body-on-dark: #ffffff;
+      --body-muted: #cccccc;
+      --ink-muted-80: #333333;
+      --ink-muted-48: #7a7a7a;
+      --divider-soft: #f0f0f0;
+      --hairline: #e0e0e0;
+      --canvas: #ffffff;
+      --canvas-parchment: #f5f5f7;
+      --surface-pearl: #fafafc;
+      --surface-tile-1: #272729;
+      --surface-tile-2: #2a2a2c;
+      --surface-tile-3: #252527;
+      --surface-black: #000000;
+      --product-shadow: rgba(0,0,0,0.22) 3px 5px 30px 0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; overflow: hidden; }
+
+    body {
+      font-family: "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background: var(--surface-black);
+      font-size: 17px;
+      line-height: 1.47;
+      letter-spacing: -0.374px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── DECK TRACK ─── */
+    .deck {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      flex: 0 0 100vw;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(32px, 6vh, 80px) clamp(24px, 6vw, 96px);
+      overflow-y: auto;
+    }
+
+    .light { background: var(--canvas); color: var(--ink); }
+    .parchment { background: var(--canvas-parchment); color: var(--ink); }
+    .dark  { background: var(--surface-tile-1); color: var(--body-on-dark); }
+    .dark2 { background: var(--surface-tile-2); color: var(--body-on-dark); }
+    .dark3 { background: var(--surface-tile-3); color: var(--body-on-dark); }
+
+    .inner { max-width: 900px; width: 100%; margin: auto; }
+
+    /* ─── TYPOGRAPHY ─── */
+    .eyebrow {
+      font-size: clamp(15px, 2.2vh, 21px);
+      font-weight: 600;
+      letter-spacing: 0.231px;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+    .dark .eyebrow, .dark2 .eyebrow, .dark3 .eyebrow { color: var(--primary-on-dark); }
+
+    h1.hero {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: clamp(40px, 8vh, 72px);
+      font-weight: 600;
+      line-height: 1.06;
+      letter-spacing: -0.4px;
+    }
+    h2.display {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: clamp(30px, 5.6vh, 52px);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.2px;
+    }
+    .lead {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: clamp(19px, 3vh, 28px);
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: 0.196px;
+      margin-top: 20px;
+      color: var(--ink-muted-80);
+    }
+    .dark .lead, .dark2 .lead, .dark3 .lead, .parchment .lead { }
+    .dark .lead, .dark2 .lead, .dark3 .lead { color: var(--body-muted); }
+
+    .prose { max-width: 760px; margin: 24px auto 0; text-align: left; }
+    .prose p {
+      font-size: clamp(15px, 2.4vh, 21px);
+      line-height: 1.5;
+      font-weight: 400;
+      letter-spacing: 0;
+      margin-bottom: 16px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    strong { font-weight: 600; }
+    .dark strong, .dark2 strong, .dark3 strong { color: #fff; }
+
+    /* ─── PRODUCT GLYPH ─── */
+    .product {
+      width: clamp(90px, 15vh, 132px);
+      height: clamp(90px, 15vh, 132px);
+      margin: clamp(24px, 4vh, 48px) auto 0;
+      border-radius: 26px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: clamp(44px, 8vh, 64px);
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(160deg, #3a3a3c, #1d1d1f);
+      box-shadow: var(--product-shadow);
+      letter-spacing: -1px;
+    }
+    .light .product, .parchment .product {
+      background: linear-gradient(160deg, #f0f0f2, #d9d9de);
+      color: var(--ink);
+    }
+
+    /* ─── CTA PILLS ─── */
+    .ctas { display: flex; gap: 16px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center;
+      background: var(--primary); color: #fff;
+      border-radius: 9999px; padding: 11px 22px;
+      font-size: 17px; letter-spacing: -0.374px; text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+    .pill:active { transform: scale(0.95); }
+    .pill.ghost { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+    .dark .pill.ghost, .dark2 .pill.ghost, .dark3 .pill.ghost { color: var(--primary-on-dark); border-color: var(--primary-on-dark); }
+
+    a.link { color: var(--primary); text-decoration: none; }
+    .dark a.link, .dark2 a.link, .dark3 a.link { color: var(--primary-on-dark); }
+    a.link:hover { text-decoration: underline; }
+
+    /* ─── STAT ROW ─── */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 36px; }
+    .stat .n {
+      font-family: "SF Pro Display", system-ui, sans-serif;
+      font-size: clamp(28px, 4.5vh, 40px); font-weight: 600; color: var(--primary); line-height: 1;
+    }
+    .dark .stat .n, .dark2 .stat .n, .dark3 .stat .n { color: var(--primary-on-dark); }
+    .stat .l { font-size: 14px; letter-spacing: -0.224px; margin-top: 8px; color: var(--body-muted); }
+    .parchment .stat .l, .light .stat .l { color: var(--ink-muted-48); }
+
+    /* ─── CARD GRID ─── */
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 32px; text-align: left; }
+    .card {
+      background: var(--canvas); border: 1px solid var(--hairline);
+      border-radius: 18px; padding: 20px;
+    }
+    .dark .card, .dark2 .card, .dark3 .card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.10); }
+    .card .k { font-size: 13px; font-weight: 600; letter-spacing: -0.2px; color: var(--primary); margin-bottom: 6px; }
+    .dark .card .k, .dark2 .card .k, .dark3 .card .k { color: var(--primary-on-dark); }
+    .card .h { font-size: 17px; font-weight: 600; letter-spacing: -0.374px; margin-bottom: 6px; }
+    .card p { font-size: 13.5px; line-height: 1.42; letter-spacing: -0.2px; color: var(--ink-muted-48); }
+    .dark .card p, .dark2 .card p, .dark3 .card p { color: var(--body-muted); }
+    .ptags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .ptag { font-size: 11.5px; letter-spacing: -0.1px; color: var(--primary); border: 1px solid var(--hairline); border-radius: 9999px; padding: 2px 9px; }
+    .dark .ptag, .dark2 .ptag, .dark3 .ptag { color: var(--primary-on-dark); border-color: rgba(255,255,255,0.15); }
+
+    /* ─── CONTACT LIST ─── */
+    .contact { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; align-items: center; }
+    .contact a {
+      font-size: clamp(16px, 2.4vh, 19px);
+      color: var(--primary-on-dark); text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 9999px;
+      padding: 10px 26px; min-width: 280px;
+      transition: transform 0.15s ease;
+    }
+    .contact a:active { transform: scale(0.97); }
+
+    /* ═══ DECK CHROME ═══ */
+    .deck-nav {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      height: 56px;
+      display: flex; align-items: center; justify-content: center; gap: 20px;
+      background: rgba(0,0,0,0.001);
+      pointer-events: none;
+    }
+    .dots { display: flex; gap: 10px; pointer-events: auto; }
+    .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: rgba(127,127,127,0.4); border: none; padding: 0; cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .dot.active { background: var(--primary); transform: scale(1.25); }
+
+    .arrow {
+      position: fixed; top: 50%; transform: translateY(-50%); z-index: 60;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(127,127,127,0.14); color: currentColor;
+      border: none; cursor: pointer; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, opacity 0.2s;
+    }
+    .arrow:hover { background: rgba(127,127,127,0.28); }
+    .arrow:disabled { opacity: 0.25; cursor: default; }
+    .arrow.prev { left: 20px; }
+    .arrow.next { right: 20px; }
+
+    .counter {
+      position: fixed; top: 20px; right: 24px; z-index: 60;
+      font-size: 13px; letter-spacing: -0.12px;
+      color: var(--ink-muted-48);
+      background: rgba(127,127,127,0.12);
+      padding: 4px 12px; border-radius: 9999px;
+    }
+    .hint {
+      position: fixed; top: 20px; left: 24px; z-index: 60;
+      font-size: 12px; color: var(--ink-muted-48);
+      background: rgba(127,127,127,0.12);
+      padding: 4px 12px; border-radius: 9999px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 · HERO (light) -->
+    <section class="slide light">
+      <div class="inner">
+        <div class="eyebrow">Self-Introduction · 게임 기획자</div>
+        <h1 class="hero">기억에 남는 경험을<br>기획합니다.</h1>
+        <p class="lead">시스템·콘텐츠 기획과 수치 밸런싱을 주력으로 하는 기획자, 정회성입니다.</p>
+        <div class="product">鄭</div>
+      </div>
+    </section>
+
+    <!-- 2 · 성장과정 (dark) -->
+    <section class="slide dark">
+      <div class="inner">
+        <div class="eyebrow">Chapter 01 — 열정을 따라온 커리어</div>
+        <h2 class="display">한 번의 방향 전환이,<br>진짜 하고 싶은 일 앞에.</h2>
+        <div class="prose">
+          <p>
+            2019년부터 약 1년 11개월간 <strong>코리아디지탈(주)</strong>에서 3인 팀의 제조·수리
+            업무를 담당했지만, 마음속에는 "사람의 마음을 움직이는 경험을 직접 만들고 싶다"는 확신이
+            자라고 있었습니다.
+          </p>
+          <p>
+            그 열정을 따라 <strong>게임 기획</strong>으로 커리어를 전환했습니다. 유한대 게임콘텐츠과를
+            졸업하고, 지금은 <strong>컴퓨터소프트웨어과 전공심화 과정</strong>에서 CS 기초를 더 깊이
+            다지고 있습니다.
+          </p>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="n">장학생</div><div class="l">교내 성적 장학생</div></div>
+          <div class="stat"><div class="n">3+</div><div class="l">주요 프로젝트 완성</div></div>
+          <div class="stat"><div class="n">CS</div><div class="l">전공심화 재학 중</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · 강점 (parchment) -->
+    <section class="slide parchment">
+      <div class="inner">
+        <div class="eyebrow">Chapter 02 — 강점 & 일하는 방식</div>
+        <h2 class="display">추상적인 재미를,<br>측정 가능한 데이터로.</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="k">데이터 기반 기획</div>
+            <div class="h">감이 아닌 근거로</div>
+            <p>추상적 아이디어를 Excel 데이터 시트로 정량화해 수치 밸런싱에 반영합니다.</p>
+          </div>
+          <div class="card">
+            <div class="k">명확한 커뮤니케이션</div>
+            <div class="h">방향성을 제시</div>
+            <p>꼼꼼한 스케줄링과 타 직군과의 원활한 소통으로 프로젝트를 이끕니다.</p>
+          </div>
+          <div class="card">
+            <div class="k">올라운더 리더십</div>
+            <div class="h">기획과 구현을 연결</div>
+            <p>Unity 핸들링과 C++ 시스템 이해를 겸비해 프로젝트 전반을 리드합니다.</p>
+          </div>
+          <div class="card">
+            <div class="k">AI 활용 역량</div>
+            <div class="h">파이프라인에 통합</div>
+            <p>Flow AI, NotebookLM, Claude를 기획·에셋·문서 작업에 적극 활용합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · 경험 / 프로젝트 (dark2) -->
+    <section class="slide dark2">
+      <div class="inner">
+        <div class="eyebrow">Chapter 03 — 직접 만들며 배운 것</div>
+        <h2 class="display">기획과 개발의 경계를<br>넘나든 4개의 프로젝트.</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="k">Project 01 · 4인 개발</div>
+            <div class="h">낚시 소녀</div>
+            <p>도트 아트 안드로이드 낚시 게임. 시스템 설계·수치 밸런싱·에셋·4컷 웹툰 광고 기획.</p>
+            <div class="ptags"><span class="ptag">Unity</span><span class="ptag">C#</span><span class="ptag">Android</span></div>
+          </div>
+          <div class="card">
+            <div class="k">Project 02 · 2인 · 진행 중</div>
+            <div class="h">메이플 월드 콘테스트</div>
+            <p>MapleWorld API 게임을 협업해 글로벌 콘테스트 출품 목표. 메인 기획 파트 담당.</p>
+            <div class="ptags"><span class="ptag">MapleWorld API</span><span class="ptag">진행중</span></div>
+          </div>
+          <div class="card">
+            <div class="k">Project 03 · 1인 기획</div>
+            <div class="h">이터널리턴 스카디</div>
+            <p>신규 실험체 '스카디' 컨셉·스킬셋·밸런스 설계. 캐릭터 아이덴티티 구축.</p>
+            <div class="ptags"><span class="ptag">캐릭터 기획</span><span class="ptag">스킬 설계</span></div>
+          </div>
+          <div class="card">
+            <div class="k">Project 04 · 1인 기획</div>
+            <div class="h">메이플 컴패니언 앱</div>
+            <p>메이플스토리 통합 컴패니언 앱 UI/UX 기획. Figma 인터페이스·사용자 흐름 정의.</p>
+            <div class="ptags"><span class="ptag">Figma</span><span class="ptag">UI/UX</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · 입사 후 포부 (light) -->
+    <section class="slide light">
+      <div class="inner">
+        <div class="eyebrow">Chapter 04 — 입사 후 포부</div>
+        <h2 class="display">단순한 플레이를 넘어,<br>여운을 남기겠습니다.</h2>
+        <div class="prose">
+          <p>
+            팀의 데이터와 시스템을 빠르게 이해해 <strong>수치 밸런싱 역량</strong>으로 콘텐츠
+            완성도에 즉시 기여하고, Unity 구현 이해와 AI 디렉팅을 결합해 기획-개발-아트의 간극을
+            줄이는 <strong>연결형 기획자</strong>로 성장하겠습니다.
+          </p>
+          <p>
+            5년 뒤에는 글로벌 게임의 핵심 기획자로 자리매김하고, 플레이어의 마음에 진한 여운을
+            남기는 <strong>'인생 게임'</strong>을 직접 설계하는 것 — 그것이 제가 이 길을 걷는
+            이유입니다.
+          </p>
+        </div>
+        <div class="product">◆</div>
+      </div>
+    </section>
+
+    <!-- 6 · CONTACT (dark3) -->
+    <section class="slide dark3">
+      <div class="inner">
+        <div class="eyebrow">Thank You</div>
+        <h2 class="display">함께 기억에 남는 경험을<br>만들고 싶습니다.</h2>
+        <div class="contact">
+          <a href="https://www.notion.so/a29a118633cf8283b9a701d7e156403c?source=copy_link" target="_blank" rel="noopener">Notion 포트폴리오 →</a>
+          <a href="https://github.com/haesung11291/studygame-Ai" target="_blank" rel="noopener">GitHub →</a>
+          <a href="mailto:sakakirito6339@gmail.com">sakakirito6339@gmail.com →</a>
+        </div>
+        <p class="lead" style="margin-top:28px;">정회성 · 게임 기획자 · 인천 부평구</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- CHROME -->
+  <div class="hint">← → 방향키 · 클릭 · F11 전체화면</div>
+  <div class="counter" id="counter">1 / 6</div>
+  <button class="arrow prev" id="prev" aria-label="이전">‹</button>
+  <button class="arrow next" id="next" aria-label="다음">›</button>
+  <div class="deck-nav"><div class="dots" id="dots"></div></div>
+
+  <script>
+    (function () {
+      var deck = document.getElementById('deck');
+      var slides = deck.querySelectorAll('.slide');
+      var total = slides.length;
+      var idx = 0;
+
+      var prevBtn = document.getElementById('prev');
+      var nextBtn = document.getElementById('next');
+      var counter = document.getElementById('counter');
+      var dotsWrap = document.getElementById('dots');
+
+      // build dots
+      var dots = [];
+      for (var i = 0; i < total; i++) {
+        var b = document.createElement('button');
+        b.className = 'dot';
+        b.setAttribute('aria-label', (i + 1) + '번 슬라이드');
+        (function (n) { b.addEventListener('click', function () { go(n); }); })(i);
+        dotsWrap.appendChild(b);
+        dots.push(b);
+      }
+
+      // chrome color adapts to slide (dark vs light)
+      function isDark(el) {
+        return el.classList.contains('dark') || el.classList.contains('dark2') || el.classList.contains('dark3');
+      }
+
+      function render() {
+        deck.style.transform = 'translateX(' + (-idx * 100) + 'vw)';
+        counter.textContent = (idx + 1) + ' / ' + total;
+        prevBtn.disabled = idx === 0;
+        nextBtn.disabled = idx === total - 1;
+        dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+
+        var dark = isDark(slides[idx]);
+        var c = dark ? '#ffffff' : '#1d1d1f';
+        prevBtn.style.color = c;
+        nextBtn.style.color = c;
+      }
+
+      function go(n) {
+        idx = Math.max(0, Math.min(total - 1, n));
+        render();
+      }
+
+      prevBtn.addEventListener('click', function () { go(idx - 1); });
+      nextBtn.addEventListener('click', function () { go(idx + 1); });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { go(idx + 1); e.preventDefault(); }
+        else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { go(idx - 1); e.preventDefault(); }
+        else if (e.key === 'Home') { go(0); }
+        else if (e.key === 'End') { go(total - 1); }
+      });
+
+      // click anywhere on slide (not links/buttons) advances
+      deck.addEventListener('click', function (e) {
+        if (e.target.closest('a, button')) return;
+        go(idx + 1);
+      });
+
+      window.addEventListener('resize', render);
+      render();
+    })();
+  </script>
+
+</body>
+</html>
